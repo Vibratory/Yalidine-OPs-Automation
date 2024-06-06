@@ -1,0 +1,28 @@
+let t;
+ t = prompt('Get SAC page'); //scan the tracking code
+ if (t != null){ // if t === null means cancel is clicked
+ACtl.runInTab('#currentTab', t, t => {
+	
+	window.open("https://yalidine.app/app/colis/index.php?source=cec&column=tracking&q=" + t, "_self");
+
+});// takes u to (tous les colis) page of this tracking
+
+await ACtl.on('tabLoadEnd', '#currentTab'); // wait for page to load
+
+ACtl.runInTab('#currentTab', () => {
+document.getElementsByClassName("btn btn-sm btn-success")[1].click();
+
+let s = document.getElementsByClassName("modal-body")[2].textContent;
+function getCharacter(str, n) {
+		let newString = str.slice(-n);
+		return newString;
+
+	}
+	let x = getCharacter(s.trim(),10);
+window.open("https://yalidine.app/app/sac_manifest.php?tracking=" + x, "_self"); //sac url to print
+
+});
+await ACtl.sleep(2000);
+	await ACtl.execAction('f1', '#currentTab');
+}
+	

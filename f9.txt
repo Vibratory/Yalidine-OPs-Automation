@@ -1,0 +1,4 @@
+	let t = document.getElementById("textareaInsertion").value;
+	await ACtl.pubVar('variable1', t) ;
+	document.getElementById("validate").click();
+	document.getElementById("sendData").click();

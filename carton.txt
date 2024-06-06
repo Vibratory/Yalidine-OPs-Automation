@@ -1,0 +1,325 @@
+let t;
+function beep() {
+	var snd = new Audio(
+		"data:audio/wav;base64,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qJrx4KOQjahZxWbcZgztj2c49nKmkId44S71j0c8eV9yDK6uPRzx5X18eDvjvQ6yKo9ZSS6l//8elePK/Lf//IInrOF/FvDoADYAGBMGb7FtErm5MXMlmPAJQVgWta7Zx2go+8xJ0UiCb8LHHdftWyLJE0QIAIsI+UbXu67dZMjmgDGCGl1H+vpF4NSDckSIkk7Vd+sxEhBQMRU8j/12UIRhzSaUdQ+rQU5kGeFxm+hb1oh6pWWmv3uvmReDl0UnvtapVaIzo1jZbf/pD6ElLqSX+rUmOQNpJFa/r+sa4e/pBlAABoAAAAA3CUgShLdGIxsY7AUABPRrgCABdDuQ5GC7DqPQCgbbJUAoRSUj+NIEig0YfyWUho1VBBBA//uQZB4ABZx5zfMakeAAAAmwAAAAF5F3P0w9GtAAACfAAAAAwLhMDmAYWMgVEG1U0FIGCBgXBXAtfMH10000EEEEEECUBYln03TTTdNBDZopopYvrTTdNa325mImNg3TTPV9q3pmY0xoO6bv3r00y+IDGid/9aaaZTGMuj9mpu9Mpio1dXrr5HERTZSmqU36A3CumzN/9Robv/Xx4v9ijkSRSNLQhAWumap82WRSBUqXStV/YcS+XVLnSS+WLDroqArFkMEsAS+eWmrUzrO0oEmE40RlMZ5+ODIkAyKAGUwZ3mVKmcamcJnMW26MRPgUw6j+LkhyHGVGYjSUUKNpuJUQoOIAyDvEyG8S5yfK6dhZc0Tx1KI/gviKL6qvvFs1+bWtaz58uUNnryq6kt5RzOCkPWlVqVX2a/EEBUdU1KrXLf40GoiiFXK///qpoiDXrOgqDR38JB0bw7SoL+ZB9o1RCkQjQ2CBYZKd/+VJxZRRZlqSkKiws0WFxUyCwsKiMy7hUVFhIaCrNQsKkTIsLivwKKigsj8XYlwt/WKi2N4d//uQRCSAAjURNIHpMZBGYiaQPSYyAAABLAAAAAAAACWAAAAApUF/Mg+0aohSIRobBAsMlO//Kk4soosy1JSFRYWaLC4qZBYWFRGZdwqKiwkNBVmoWFSJkWFxX4FFRQWR+LsS4W/rFRb/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////VEFHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAU291bmRib3kuZGUAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMjAwNGh0dHA6Ly93d3cuc291bmRib3kuZGUAAAAAAAAAACU="
+	);
+	snd.play();
+}
+beep();
+t = prompt('Scan carton'); //scan the tracking code
+if (t != null) { //if cancel is clicked returns null and exits the script
+
+
+	ACtl.runInTab('#currentTab', t, t => {
+		window.open("https://yalidine.app/app/colis/index.php?source=cec&column=tracking&q=" + t, "_self");
+	}); //check package tracking and open its page
+
+	await ACtl.on('tabLoadEnd', '#currentTab'); //wait page to load
+	ACtl.runInTab('#currentTab', t, t => {
+		
+
+		function getCharacter(str, n) {
+			let newString = str.slice(-n);
+			return newString;
+
+		}
+
+		function getWilayaFullZip(WZip) {
+			switch (WZip) {
+				case "1":
+					//alert("wilaya is adrar");
+					WZip = "10101";
+					break;
+
+				case "2":
+					// alert("wilaya is chlef");
+					WZip = "21101";
+					break;
+
+				case "3":
+					//  alert("wilaya is Laghouat");
+					WZip = "30101";
+					break;
+
+				case "4":
+					//   alert("wilaya is adrar");
+					WZip = "40101";
+					break;
+
+				case "5":
+					//  alert("wilaya is chlef");
+					WZip = "50102";
+					break;
+
+				case "6":
+					//  alert("wilaya is Laghouat");
+					WZip = "60101";
+					break;
+				case "7":
+					//   alert("wilaya is adrar");
+					WZip = "70401";
+					break;
+
+				case "8":
+					// alert("wilaya is chlef");
+					WZip = "80101";
+					break;
+
+				case "9":
+					//  alert("wilaya is Laghouat");
+					WZip = "90101";
+					break;
+
+				case "10":
+					// alert("wilaya is adrar");
+					WZip = "101601";
+					break;
+
+				case "11":
+					//  alert("wilaya is chlef");
+					WZip = "110101";
+					break;
+
+				case "12":
+					//alert("wilaya is Laghouat");
+					WZip = "120101";
+					break;
+
+				case "13":
+					// alert("wilaya is adrar");
+					WZip = "130101";
+					break;
+
+				case "14":
+					// alert("wilaya is chlef");
+					WZip = "143901";
+					break;
+
+				case "15":
+					// alert("wilaya is Laghouat");
+					WZip = "151101";
+					break;
+
+				case "16":
+					//  alert("wilaya is adrar");
+					WZip = "161501";
+					break;
+
+				case "17":
+					// alert("wilaya is chlef");
+					WZip = "171401";
+					break;
+
+				case "18":
+					//   alert("wilaya is Laghouat");
+					WZip = "180101";
+					break;
+
+				case "19":
+					// alert("wilaya is adrar");
+					WZip = "190201";
+					break;
+
+				case "20":
+					//  alert("wilaya is chlef");
+					WZip = "201101";
+					break;
+
+				case "21":
+					// alert("wilaya is Laghouat");
+					WZip = "213501";
+					break;
+
+				case "22":
+					//  alert("wilaya is adrar");
+					WZip = "223601";
+					break;
+
+				case "23":
+					//alert("wilaya is chlef");
+					WZip = "230801";
+					break;
+
+				case "24":
+					//  alert("wilaya is Laghouat");
+					WZip = "241901";
+					break;
+
+				case "25":
+					// //alert("wilaya is adrar");
+					WZip = "250603";
+					break;
+
+				case "26":
+					//  alert("wilaya is chlef");
+					WZip = "263301";
+					break;
+
+				case "27":
+					//    alert("wilaya is Laghouat");
+					WZip = "271801";
+					break;
+
+				case "28":
+					// alert("wilaya is adrar");
+					WZip = "282802";
+					break;
+
+				case "29":
+					// alert("wilaya is chlef");
+					WZip = "292801";
+					break;
+
+				case "30":
+					//alert("wilaya is Laghouat");
+					WZip = "301301";
+					break;
+
+				case "31":
+					//  alert("wilaya is Laghouat");
+					WZip = "310501";
+					break;
+
+				case "32":
+					//  alert("wilaya is adrar");
+					WZip = "320101";
+					break;
+
+				case "33":
+					// alert("wilaya is chlef");
+					WZip = "330101";
+					break;
+
+				case "34":
+					// alert("wilaya is Laghouat");
+					WZip = "340601";
+					break;
+
+				case "35":
+					// alert("wilaya is adrar");
+					WZip = "350101";
+					break;
+
+				case "36":
+					//  alert("wilaya is chlef");
+					WZip = "361701";
+					break;
+
+				case "37":
+					// alert("wilaya is Laghouat");
+					WZip = "370201";
+					break;
+
+				case "38":
+					//    alert("wilaya is adrar");
+					WZip = "382101";
+					break;
+
+				case "39":
+					//   alert("wilaya is chlef");
+					WZip = "390101";
+					break;
+				case "40":
+					// alert("wilaya is Laghouat");
+					WZip = "401301";
+					break;
+
+				case "41":
+					// alert("wilaya is Laghouat");
+					WZip = "410101";
+					break;
+
+				case "42":
+					// alert("wilaya is Tizpaza");
+					WZip = "420101";
+					break;
+
+				case "43":
+					//  alert("wilaya is Mila");
+					WZip = "431601";
+					break;
+
+				case "44":
+					//alert("wilaya is Ain Defla");
+					WZip = "440101";
+					break;
+
+				case "45":
+					//   alert("wilaya is Naama");
+					WZip = "450101";
+					break;
+
+				case "46":
+					//  alert("wilaya is Aïn Témouchent");
+					WZip = "460401";
+					break;
+
+				case "47":
+					//  alert("wilaya is Ghardaia");
+					WZip = "470701";
+					break;
+
+				case "48":
+					// alert("wilaya is Relizan");
+					WZip = "483001";
+					break;
+
+			}
+			return WZip
+		}
+
+		var AD = document.getElementsByClassName("border-left")[14];
+
+		if (AD.innerHTML.trim() == "") { //to check if StopDesk or HomeDelivery
+
+
+			var W = document.getElementsByClassName("mr-1 btn btn-sm btn-outline-info")[1].href;
+
+			WZip = (getCharacter(W, 2));
+
+			WZip = WZip.replace(/\D/g, '');
+
+			WZip = (getWilayaFullZip(WZip));
+
+			window.open("https://yalidine.app/app/sac/ajouter.php?t=v&f_hi=195502&t_hi=" + WZip, "_self");
+
+		} else {
+
+			var SD = document.getElementsByClassName("mr-1 btn btn-sm btn-outline-info")[2].href; //get link
+
+			ZIP = (getCharacter(SD, 6));
+			//use only last 6 chars they represent the zip
+			//alert (ZIP);
+			ZIP = ZIP.replace(/\D/g, ''); // Remove non number chars
+			window.open("https://yalidine.app/app/sac/ajouter.php?t=v&f_hi=195502&t_hi=" + ZIP, "_self");
+		}
+	});
+
+	await ACtl.on('tabLoadEnd', '#currentTab');
+
+	ACtl.runInTab('#currentTab', t, t => {
+
+		document.getElementById("tracking").value = t; // inputs tracking code in box
+
+		document.getElementsByClassName("btn btn-success")[0].click();//clicks Ajouter a la liste
+		
+		document.getElementById("sendData").click(); // clicks Creer le sac
+
+	}); // fills the input with tracking and submits it 
+	
+	await ACtl.on('tabLoadEnd', '#currentTab');
+
+	ACtl.runInTab('#currentTab', t, t => { //pulls the printing page
+		var print = document.getElementsByClassName('alert alert-success');
+
+		if (print.length > 0 && window.document.title == "Créer un sac") {
+			window.open(document.getElementsByClassName("btn btn-sm btn-primary")[0].href);
+
+		}
+	});
+await ACtl.sleep(2500);
+await ACtl.execAction('f1', '#currentTab') ;
+}else{
+await ACtl.pubVar('var', 'cancel') ;
+}
+
